@@ -1,0 +1,39 @@
+const express = require('express')
+
+const server = express()
+
+server.listen(3000)
+
+server.use(express.json())
+
+const items = ['a', 'b', 'c']
+
+//return item
+server.get('/items/:index', (req, res) => {
+    const { index } = req.params
+    return res.json(items[index])
+})
+
+//return all items
+server.get('/items', (req, res) => {
+    const { index } = req.params
+    return res.json(items)
+})
+
+//create items
+server.post('/items', (req,res) => {
+    const { name } = req.body
+    items.push(name)
+
+    return res.json(items)
+})
+
+//update
+server.put('/items/:index', (req, res) => {
+    const { index } = req.params
+    const { name } = req.params
+
+    items[index] = name
+
+    return res.json(items)
+})
